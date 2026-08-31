@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 
 # module-level imports
 from management.routers.checkout import checkout_v1_route
@@ -16,3 +17,9 @@ management.include_router(orders_v1_route)
 management.include_router(customers_v1_route)
 management.include_router(products_v1_route)
 management.include_router(payment_v1_route)
+
+
+# Health check
+@management.get("/health")
+async def health_check():
+    return JSONResponse(content={"status": "ok"}, status_code=200)
