@@ -1,5 +1,6 @@
-# API Versioning
+# API Standards
 
+## Versioning
 ### Rules:
 
 1. Use /v1 as prefix in module level routers, and same naming convention
