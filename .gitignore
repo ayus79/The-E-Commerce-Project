@@ -50,7 +50,7 @@ Thumbs.db
 # claude files
 .claude
 
-*.md
+!.md
 !README.md
 !DOCKER_README.md
 
