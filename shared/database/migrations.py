@@ -5,24 +5,24 @@ from shared.utils.log_client import log_message
 from shared.database.schemas import CREATE_URLS_TABLE
 
 
-def _maintenance_dsn(database_url: str) -> str:
+def _maintenance_dsn(postgres_database_url: str) -> str:
     """Swap the DSN's path to Postgres's always-present 'postgres' maintenance
     database. You can't CREATE DATABASE while connected to the database
     you're trying to create (or replace), so this connects elsewhere first.
     """
-    parsed = urlparse(database_url)
+    parsed = urlparse(postgres_database_url)
     return urlunparse(parsed._replace(path="/postgres"))
 
 
 async def ensure_database_exists() -> None:
-    """Creates settings.database_name if it doesn't exist yet.
+    """Creates settings.postgres_database_name if it doesn't exist yet.
 
     Uses a raw asyncpg connection (not the pooled PostgresClient) because
     CREATE DATABASE cannot run inside a transaction block, and the target
     database's own pool can't be opened before the database exists.
     """
-    target_db = settings.database_name
-    admin_dsn = _maintenance_dsn(settings.database_url)
+    target_db = settings.postgres_database_name
+    admin_dsn = _maintenance_dsn(settings.postgres_database_url)
 
     connection = await asyncpg.connect(dsn=admin_dsn)
     try:
@@ -42,7 +42,7 @@ async def ensure_database_exists() -> None:
 
 async def run_migrations() -> None:
     """Creates required tables if they don't already exist."""
-    connection = await asyncpg.connect(dsn=settings.database_url)
+    connection = await asyncpg.connect(dsn=settings.postgres_database_url)
     try:
         await connection.execute(CREATE_URLS_TABLE)
         log_message(

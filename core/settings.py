@@ -15,9 +15,6 @@ class SettingsConfig(BaseSettings):
     postgres_database_url: str = (
         f"postgresql://postgres@localhost:5432/{postgres_database_name}"
     )
-    # mongo database details
-    mongo_database_name: str = "the-ecommerce-project"
-    mongo_database_url: str = f"mongodb://localhost:27017/{mongo_database_name}"
     # redis details
     redis_url: str = "redis://localhost:6379/0"
 

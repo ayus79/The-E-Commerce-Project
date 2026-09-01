@@ -13,7 +13,7 @@ class PostgresClient:
 
     _pools: dict = {}
 
-    def __init__(self, database_url: str = settings.database_url):
+    def __init__(self, database_url: str = settings.postgres_database_url):
         self.database_url = database_url
 
     # ---------- Internal (Singleton pool creator) ----------
