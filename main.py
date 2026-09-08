@@ -42,7 +42,7 @@ app.include_router(storefront)
 
 
 # Health check
-@app.get("/health", tags=["App"])
+@app.get("/health")
 async def health_check():
     return JSONResponse(content={"status": "ok"}, status_code=200)
 

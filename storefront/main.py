@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 
-storefront = APIRouter(prefix="/storefront", tags=["Storefront"])
+storefront = APIRouter(prefix="/storefront")
 
 
 # Health check

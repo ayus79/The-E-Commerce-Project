@@ -9,7 +9,7 @@ from management.routers.products import products_v1_route
 from management.routers.payment import payment_v1_route
 
 
-management = APIRouter(prefix="/management", tags=["Management"])
+management = APIRouter(prefix="/management")
 
 
 management.include_router(checkout_v1_route)
