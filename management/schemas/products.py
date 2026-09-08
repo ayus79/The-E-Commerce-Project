@@ -8,3 +8,11 @@ class ProductsQuerySchema(BaseModel):
     sort_by: Literal["created_at", "updated_at"] = "created_at"
     sort_order: Literal[1, -1] = -1
     search: Optional[str] = Field(default=None, max_length=200)
+
+
+class ProductsCreateBodySchema(BaseModel):
+    pass
+
+
+class ProductsUpdateBodySchema(BaseModel):
+    pass
