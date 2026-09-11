@@ -1,4 +1,5 @@
 from functools import wraps
+
 from shared.middleware.rate_limiter.utils import RateLimitAlgo
 
 

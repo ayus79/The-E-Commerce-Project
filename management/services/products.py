@@ -1,10 +1,11 @@
 from fastapi import Request
+
+from management.messages import PRODUCTS
 from management.schemas.products import (
+    ProductsCreateBodySchema,
     ProductsQuerySchema,
     ProductsUpdateBodySchema,
-    ProductsCreateBodySchema,
 )
-from management.messages import PRODUCTS
 
 
 async def get_all_products(request: Request, params: ProductsQuerySchema) -> list[dict]:

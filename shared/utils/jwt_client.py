@@ -1,9 +1,11 @@
-from datetime import datetime, timedelta, timezone
 import os
-from typing import Dict, Optional
-import jwt
 import uuid
+from datetime import datetime, timedelta, timezone
+from typing import Dict, Optional
+
+import jwt
 from jwt import ExpiredSignatureError, InvalidTokenError
+
 from shared.utils.log_client import log_message
 
 

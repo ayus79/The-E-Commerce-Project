@@ -1,8 +1,10 @@
 from urllib.parse import urlparse, urlunparse
+
 import asyncpg
+
 from core.settings import settings
-from shared.utils.log_client import log_message
 from shared.database.schemas import CREATE_URLS_TABLE
+from shared.utils.log_client import log_message
 
 
 def _maintenance_dsn(postgres_database_url: str) -> str:

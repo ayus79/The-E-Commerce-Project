@@ -1,6 +1,8 @@
-from typing import Optional
 from contextlib import asynccontextmanager
+from typing import Optional
+
 import asyncpg
+
 from core.settings import settings
 from shared.utils.log_client import log_message
 

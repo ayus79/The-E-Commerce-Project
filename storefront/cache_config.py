@@ -13,8 +13,9 @@ Key pattern: hmspro:hotelier-panel:cache:{db_name}:{resource}[:{variant}]
 
 import json
 import time
-from shared.database.redis_client import RedisClient
+
 from core.settings import settings
+from shared.database.redis_client import RedisClient
 
 _redis = RedisClient(settings.redis_url)
 

@@ -1,9 +1,11 @@
 import time
 import uuid
 from typing import Optional, Set, Tuple
+
 from redis.exceptions import RedisError
-from shared.middleware.rate_limiter.utils import _LUA_TOKEN_BUCKET, RateLimitAlgo
+
 from shared.database.redis_client import RedisClient
+from shared.middleware.rate_limiter.utils import _LUA_TOKEN_BUCKET, RateLimitAlgo
 
 
 class RateLimiter:

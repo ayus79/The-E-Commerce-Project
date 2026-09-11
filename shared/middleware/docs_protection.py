@@ -12,12 +12,14 @@ Configuration (via environment variables):
 
 import base64
 import hmac
+
 from fastapi import Request, status
 from fastapi.responses import HTMLResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import Response as StarletteResponse
-from shared.utils.log_client import log_message
+
 from core.settings import settings
+from shared.utils.log_client import log_message
 
 
 class DocsProtectionMiddleware(BaseHTTPMiddleware):

@@ -1,8 +1,10 @@
 import time
 from typing import Optional, Set
+
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
+
 from shared.middleware.rate_limiter.limiter import RateLimiter
 from shared.middleware.rate_limiter.utils import _WRAPPED_MAX_DEPTH, RateLimitAlgo
 

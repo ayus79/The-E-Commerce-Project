@@ -1,0 +1,55 @@
+# Pre-commit hooks configuration
+# Install with: pip install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--unsafe]  # Allow custom YAML tags
+      # - id: check-added-large-files
+      #   args: [--maxkb=1000]
+      # - id: check-json
+      - id: check-toml
+      # - id: check-merge-conflict
+      # - id: check-case-conflict
+      - id: debug-statements
+      # - id: mixed-line-ending
+      #   args: [--fix=lf]
+
+  # isort - Import sorting and organization
+  # Note: lines_between_sections is configured in pyproject.toml, not as CLI arg
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=88, --lines-between-types=0]
+
+  # Black formatter (Python and other supported files)
+  - repo: https://github.com/psf/black
+    rev: 24.1.1
+    hooks:
+      - id: black
+        language_version: python3
+        types_or: [python, pyi]
+        args: [--line-length=88]
+
+  # Check for common Python errors (commented out for now)
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa
+      - id: python-check-mock-methods
+      - id: python-no-eval
+      - id: python-no-log-warn
+
+  - repo: https://github.com/dosisod/refurb
+    rev: v2.3.1
+    hooks:
+      - id: refurb
+        args: ["--python-version", "3.14"]

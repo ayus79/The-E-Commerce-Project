@@ -1,20 +1,21 @@
 from traceback import format_exc
-from fastapi import APIRouter, Depends, Body, Request
+
+from fastapi import APIRouter, Body, Depends, Request
 from fastapi.responses import JSONResponse
+
 from management.schemas.products import (
-    ProductsQuerySchema,
     ProductsCreateBodySchema,
+    ProductsQuerySchema,
     ProductsUpdateBodySchema,
 )
-from shared.utils.log_client import log_message
 from management.services.products import (
+    create_product,
+    delete_product,
     get_all_products,
     get_product,
-    create_product,
     update_product,
-    delete_product,
 )
-
+from shared.utils.log_client import log_message
 
 products_v1_route = APIRouter(prefix="/v1", tags=["Management - Products"])
 

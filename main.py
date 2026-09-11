@@ -3,15 +3,17 @@ uvicorn main:app --port 8001 --workers 1 --reload
 """
 
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from shared.utils.log_client import log_message
+
 from core.settings import settings
 
 # service-level imports
 from management.main import management
+from shared.utils.log_client import log_message
 from storefront.main import storefront
 
 
