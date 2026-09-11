@@ -11,6 +11,7 @@ Key pattern: hmspro:hotelier-panel:cache:{db_name}:{resource}[:{variant}]
   [{variant}]       - optional: gen, list:{hash}, dropdown, all, serviceable, etc.
 """
 
+from contextlib import suppress
 import json
 import time
 

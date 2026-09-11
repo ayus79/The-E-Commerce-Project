@@ -91,7 +91,7 @@ class JwtTokenManager:
             log_message("JWT token expired", warning=True)
             return None
         except InvalidTokenError as e:
-            log_message(f"JWT token invalid: {str(e)}", warning=True)
+            log_message(f"JWT token invalid: {e}", warning=True)
             return None
 
     def is_token_expired(self, token: str) -> bool:

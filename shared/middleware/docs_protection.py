@@ -91,7 +91,7 @@ class DocsProtectionMiddleware(BaseHTTPMiddleware):
             # here too and misreported as a 401 auth failure instead of
             # surfacing as the real error.
             log_message(
-                f"[Docs Protection Middleware] Error in middleware: {str(e)} | Type: {type(e).__name__} | Path: {request.url.path}",
+                f"[Docs Protection Middleware] Error in middleware: {e} | Type: {type(e).__name__} | Path: {request.url.path}",
                 error=True,
             )
             return self._request_authentication()
@@ -133,7 +133,7 @@ class DocsProtectionMiddleware(BaseHTTPMiddleware):
                 client_ip in self.allowed_ips
                 or client_ip in allowed_list_lower
                 or (
-                    host.lower() in ["localhost", "127.0.0.1"]
+                    host.lower() in ("localhost", "127.0.0.1")
                     and (
                         "localhost" in allowed_list_lower
                         or "127.0.0.1" in allowed_list_lower
