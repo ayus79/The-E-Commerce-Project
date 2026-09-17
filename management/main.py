@@ -18,7 +18,12 @@ management.include_router(products_v1_route)
 management.include_router(payment_v1_route)
 
 
-# Health check
+# Health/Ready check
 @management.get("/health")
 async def health_check():
+    return JSONResponse(content={"status": "ok"}, status_code=200)
+
+
+@management.get("/ready")
+async def readiness_check():
     return JSONResponse(content={"status": "ok"}, status_code=200)

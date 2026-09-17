@@ -43,9 +43,14 @@ app.include_router(management)
 app.include_router(storefront)
 
 
-# Health check
+# Health/Ready check
 @app.get("/health")
 async def health_check():
+    return JSONResponse(content={"status": "ok"}, status_code=200)
+
+
+@app.get("/ready")
+async def readiness_check():
     return JSONResponse(content={"status": "ok"}, status_code=200)
 
 
