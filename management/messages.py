@@ -4,19 +4,19 @@ PRODUCTS = {
 }
 
 
-# products messages
+# customers messages
 CUSTOMERS = {
     "LIST_SUCCESS": "Products fetched successfuly.",
 }
 
 
-# products messages
+# orders messages
 ORDERS = {
     "LIST_SUCCESS": "Products fetched successfuly.",
 }
 
 
-# products messages
+# payment messages
 PAYMENT = {
     "LIST_SUCCESS": "Products fetched successfuly.",
 }
