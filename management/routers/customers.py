@@ -31,7 +31,7 @@ async def get_all_customers_endpoint(
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -51,7 +51,7 @@ async def get_customer_endpoint(request: Request, customer_id: str):
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -73,7 +73,7 @@ async def create_customer_endpoint(
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -95,7 +95,7 @@ async def update_customer_endpoint(
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -115,7 +115,7 @@ async def delete_customer_endpoint(request: Request, customer_id: str):
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )

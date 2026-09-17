@@ -30,7 +30,7 @@ async def get_all_products_endpoint(
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -50,7 +50,7 @@ async def get_product_endpoint(request: Request, product_id: str):
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -72,7 +72,7 @@ async def create_product_endpoint(
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -94,7 +94,7 @@ async def update_product_endpoint(
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
@@ -114,7 +114,7 @@ async def delete_product_endpoint(request: Request, product_id: str):
             content={
                 "status": data.get("status"),
                 "message": data.get("message"),
-                "data": data.get("data"),
+                "data": data.get("data", None),
             },
             status_code=data.get("status_code", 200),
         )
