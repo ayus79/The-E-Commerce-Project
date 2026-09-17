@@ -18,13 +18,13 @@ async def get_product(request: Request, product_id: str) -> dict:
     return {"status": True, "message": PRODUCTS["LIST_SUCCESS"], "data": {}}
 
 
-async def create_product(request: Request, params: ProductsUpdateBodySchema) -> dict:
+async def create_product(request: Request, params: ProductsCreateBodySchema) -> dict:
 
     return {"status": True, "message": PRODUCTS["LIST_SUCCESS"], "data": []}
 
 
 async def update_product(
-    request: Request, product_id: str, params: ProductsCreateBodySchema
+    request: Request, product_id: str, params: ProductsUpdateBodySchema
 ) -> dict:
 
     return {"status": True, "message": PRODUCTS["LIST_SUCCESS"], "data": []}
