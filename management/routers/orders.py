@@ -17,10 +17,11 @@ from management.services.orders import (
 )
 from shared.utils.log_client import log_message
 
-orders_v1_route = APIRouter(prefix="/v1", tags=["Management - Orders"])
+
+orders_v1_route = APIRouter(prefix="/v1/orders", tags=["Management - Orders"])
 
 
-@orders_v1_route.get("/orders")
+@orders_v1_route.get("")
 async def get_all_orders_endpoint(
     request: Request, params: OrdersQuerySchema = Depends()
 ):
@@ -42,7 +43,7 @@ async def get_all_orders_endpoint(
         )
 
 
-@orders_v1_route.get("/orders/{order_id}")
+@orders_v1_route.get("/{order_id}")
 async def get_order_endpoint(request: Request, order_id: str):
     try:
         data = await get_order(request, order_id)
@@ -62,7 +63,7 @@ async def get_order_endpoint(request: Request, order_id: str):
         )
 
 
-@orders_v1_route.post("/orders")
+@orders_v1_route.post("")
 async def create_order_endpoint(
     request: Request, params: OrdersCreateBodySchema = Body(...)
 ):
@@ -84,7 +85,7 @@ async def create_order_endpoint(
         )
 
 
-@orders_v1_route.put("/orders/{order_id}")
+@orders_v1_route.put("/{order_id}")
 async def update_order_endpoint(
     request: Request, order_id: str, params: OrdersUpdateBodySchema = Body(...)
 ):
@@ -106,7 +107,7 @@ async def update_order_endpoint(
         )
 
 
-@orders_v1_route.delete("/orders/{order_id}")
+@orders_v1_route.delete("/{order_id}")
 async def delete_order_endpoint(request: Request, order_id: str):
     try:
         data = await delete_order(request, order_id)

@@ -18,10 +18,10 @@ from management.services.customers import (
 from shared.utils.log_client import log_message
 
 
-customers_v1_route = APIRouter(prefix="/v1", tags=["Management - Customers"])
+customers_v1_route = APIRouter(prefix="/v1/customers", tags=["Management - Customers"])
 
 
-@customers_v1_route.get("/customers")
+@customers_v1_route.get("")
 async def get_all_customers_endpoint(
     request: Request, params: CustomersQuerySchema = Depends()
 ):
@@ -43,7 +43,7 @@ async def get_all_customers_endpoint(
         )
 
 
-@customers_v1_route.get("/customers/{customer_id}")
+@customers_v1_route.get("/{customer_id}")
 async def get_customer_endpoint(request: Request, customer_id: str):
     try:
         data = await get_customer(request, customer_id)
@@ -63,7 +63,7 @@ async def get_customer_endpoint(request: Request, customer_id: str):
         )
 
 
-@customers_v1_route.post("/customers")
+@customers_v1_route.post("")
 async def create_customer_endpoint(
     request: Request, params: CustomersCreateBodySchema = Body(...)
 ):
@@ -85,7 +85,7 @@ async def create_customer_endpoint(
         )
 
 
-@customers_v1_route.put("/customers/{customer_id}")
+@customers_v1_route.put("/{customer_id}")
 async def update_customer_endpoint(
     request: Request, customer_id: str, params: CustomersUpdateBodySchema = Body(...)
 ):
@@ -107,7 +107,7 @@ async def update_customer_endpoint(
         )
 
 
-@customers_v1_route.delete("/customers/{customer_id}")
+@customers_v1_route.delete("/{customer_id}")
 async def delete_customer_endpoint(request: Request, customer_id: str):
     try:
         data = await delete_customer(request, customer_id)

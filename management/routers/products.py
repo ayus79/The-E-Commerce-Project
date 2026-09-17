@@ -17,10 +17,11 @@ from management.services.products import (
 )
 from shared.utils.log_client import log_message
 
-products_v1_route = APIRouter(prefix="/v1", tags=["Management - Products"])
+
+products_v1_route = APIRouter(prefix="/v1/products", tags=["Management - Products"])
 
 
-@products_v1_route.get("/products")
+@products_v1_route.get("")
 async def get_all_products_endpoint(
     request: Request, params: ProductsQuerySchema = Depends()
 ):
@@ -42,7 +43,7 @@ async def get_all_products_endpoint(
         )
 
 
-@products_v1_route.get("/products/{product_id}")
+@products_v1_route.get("/{product_id}")
 async def get_product_endpoint(request: Request, product_id: str):
     try:
         data = await get_product(request, product_id)
@@ -62,7 +63,7 @@ async def get_product_endpoint(request: Request, product_id: str):
         )
 
 
-@products_v1_route.post("/products")
+@products_v1_route.post("")
 async def create_product_endpoint(
     request: Request, params: ProductsCreateBodySchema = Body(...)
 ):
@@ -84,7 +85,7 @@ async def create_product_endpoint(
         )
 
 
-@products_v1_route.put("/products/{product_id}")
+@products_v1_route.put("/{product_id}")
 async def update_product_endpoint(
     request: Request, product_id: str, params: ProductsUpdateBodySchema = Body(...)
 ):
@@ -106,7 +107,7 @@ async def update_product_endpoint(
         )
 
 
-@products_v1_route.delete("/products/{product_id}")
+@products_v1_route.delete("/{product_id}")
 async def delete_product_endpoint(request: Request, product_id: str):
     try:
         data = await delete_product(request, product_id)

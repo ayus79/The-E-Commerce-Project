@@ -16,7 +16,7 @@ ORDERS = {
 }
 
 
-# payment messages
-PAYMENT = {
+# payments messages
+PAYMENTS = {
     "LIST_SUCCESS": "Products fetched successfuly.",
 }

@@ -3,7 +3,7 @@ from typing import Literal, Optional
 from pydantic import BaseModel, Field
 
 
-class PaymentQuerySchema(BaseModel):
+class PaymentsQuerySchema(BaseModel):
     page: int = Field(default=1, ge=1)
     limit: int = Field(default=10, ge=1, le=100)
     sort_by: Literal["created_at", "updated_at"] = "created_at"
@@ -11,9 +11,9 @@ class PaymentQuerySchema(BaseModel):
     search: Optional[str] = Field(default=None, max_length=200)
 
 
-class PaymentCreateBodySchema(BaseModel):
+class PaymentsCreateBodySchema(BaseModel):
     pass
 
 
-class PaymentUpdateBodySchema(BaseModel):
+class PaymentsUpdateBodySchema(BaseModel):
     pass
