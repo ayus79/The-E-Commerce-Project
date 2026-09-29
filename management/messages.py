@@ -1,6 +1,7 @@
 # products messages
 PRODUCTS = {
     "LIST_SUCCESS": "Products fetched successfuly.",
+    "CREATE": "Product created successfuly.",
 }
 
 
