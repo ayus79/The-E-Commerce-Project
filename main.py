@@ -13,11 +13,11 @@ from core.settings import settings
 
 # service-level imports
 from management.main import management
+from storefront.main import storefront
 from shared.database.migrations import run_startup_migrations
 from shared.database.redis_client import get_redis_client, RedisClient
 from shared.database.postgres_client import get_postgres_client, PostgresClient
 from shared.utils.log_client import log_message
-from storefront.main import storefront
 
 
 @asynccontextmanager
@@ -34,7 +34,7 @@ async def lifespan(app: FastAPI):
 
     yield
 
-    log_message("Server is shutting down...", file_name="server", warning=True)
+    log_message("Server is shutting down...", file_name="server", info=True)
     try:
         await RedisClient.close_async()
         RedisClient.close_sync()
