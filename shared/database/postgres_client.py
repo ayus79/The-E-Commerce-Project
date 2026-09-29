@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 from typing import Optional
-
+import json
 import asyncpg
 
 from core.settings import settings
@@ -23,11 +23,21 @@ class PostgresClient:
     @classmethod
     async def _get_pool(cls, database_url: str) -> asyncpg.Pool:
         if database_url not in cls._pools:
+
+            async def init_connection(conn):
+                await conn.set_type_codec(
+                    "jsonb",
+                    encoder=json.dumps,
+                    decoder=json.loads,
+                    schema="pg_catalog",
+                )
+
             cls._pools[database_url] = await asyncpg.create_pool(
                 dsn=database_url,
                 min_size=1,
                 max_size=50,
                 command_timeout=10,
+                init=init_connection,
             )
         return cls._pools[database_url]
 

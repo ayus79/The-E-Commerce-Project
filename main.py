@@ -68,7 +68,7 @@ app.add_middleware(
 )
 
 # Rate limiting middleware
-app.add_middleware(RateLimitFastAPIMiddleware, enabled=True)
+app.add_middleware(RateLimitFastAPIMiddleware)
 
 # Register services
 app.include_router(management)

@@ -2,6 +2,7 @@ from traceback import format_exc
 
 from fastapi import APIRouter, Body, Depends, Request
 from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 
 from management.schemas.products import (
     ProductsCreateBodySchema,
@@ -70,11 +71,13 @@ async def create_product_endpoint(
     try:
         data = await create_product(request, params)
         return JSONResponse(
-            content={
-                "status": data.get("status"),
-                "message": data.get("message"),
-                "data": data.get("data", None),
-            },
+            content=jsonable_encoder(
+                {
+                    "status": data.get("status"),
+                    "message": data.get("message"),
+                    "data": data.get("data", None),
+                }
+            ),
             status_code=data.get("status_code", 200),
         )
     except Exception:
