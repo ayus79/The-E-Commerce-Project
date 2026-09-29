@@ -6,13 +6,13 @@ PRODUCTS = {
 
 # customers messages
 CUSTOMERS = {
-    "LIST_SUCCESS": "Products fetched successfuly.",
+    "LIST_SUCCESS": "Customers fetched successfuly.",
 }
 
 
 # orders messages
 ORDERS = {
-    "LIST_SUCCESS": "Products fetched successfuly.",
+    "LIST_SUCCESS": "Orders fetched successfuly.",
 }
 
 
