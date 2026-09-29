@@ -38,6 +38,18 @@ CREATE TABLE IF NOT EXISTS products (
 );
 """
 
+CREATE_PRODUCT_VARIANTS_TABLE = """
+CREATE TABLE IF NOT EXISTS product_variants (
+    id BIGSERIAL PRIMARY KEY,
+    product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    sku VARCHAR(64) UNIQUE NOT NULL,
+    variant_attributes JSONB NOT NULL,   -- e.g. {"size": "M", "color": "Red"}
+    price_override NUMERIC(12, 2),        -- NULL = use parent product's price
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+"""
+
 # ---------- Orders ----------
 
 CREATE_ORDERS_TABLE = """
