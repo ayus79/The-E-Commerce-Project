@@ -29,11 +29,18 @@ async def get_all_products_endpoint(
     try:
         data = await get_all_products(request, params)
         return JSONResponse(
-            content={
-                "status": data.get("status"),
-                "message": data.get("message"),
-                "data": data.get("data", None),
-            },
+            content=jsonable_encoder(
+                {
+                    "status": data.get("status"),
+                    "message": data.get("message"),
+                    "data": data.get("data", None),
+                    **(
+                        {"pagination": data["pagination"]}
+                        if data.get("pagination") is not None
+                        else {}
+                    ),
+                }
+            ),
             status_code=data.get("status_code", 200),
         )
     except Exception:
@@ -49,11 +56,13 @@ async def get_product_endpoint(request: Request, product_id: str):
     try:
         data = await get_product(request, product_id)
         return JSONResponse(
-            content={
-                "status": data.get("status"),
-                "message": data.get("message"),
-                "data": data.get("data", None),
-            },
+            content=jsonable_encoder(
+                {
+                    "status": data.get("status"),
+                    "message": data.get("message"),
+                    "data": data.get("data", None),
+                }
+            ),
             status_code=data.get("status_code", 200),
         )
     except Exception:

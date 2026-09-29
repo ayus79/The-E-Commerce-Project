@@ -1,28 +1,26 @@
-"""Static DDL strings for the app's Postgres schema. Kept here, separate from
-migrations.py, so the SQL itself is easy to find/review without wading through
-connection-handling code.
-"""
+from core.constants import CoreCollections
+
 
 # ---------- Customers ----------
 
-CREATE_CUSTOMERS_TABLE = """
-CREATE TABLE IF NOT EXISTS customers (
-    id BIGSERIAL PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    hashed_password TEXT NOT NULL,
-    full_name VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(20),
-    is_active BOOLEAN NOT NULL DEFAULT TRUE,
-    is_verified BOOLEAN NOT NULL DEFAULT FALSE,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-"""
+# CREATE_CUSTOMERS_TABLE = f"""
+# CREATE TABLE IF NOT EXISTS customers (
+#     id BIGSERIAL PRIMARY KEY,
+#     email VARCHAR(255) UNIQUE NOT NULL,
+#     hashed_password TEXT NOT NULL,
+#     full_name VARCHAR(255) NOT NULL,
+#     phone_number VARCHAR(20),
+#     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+#     is_verified BOOLEAN NOT NULL DEFAULT FALSE,
+#     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+#     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+# );
+# """
 
 # ---------- Products ----------
 
-CREATE_PRODUCTS_TABLE = """
-CREATE TABLE IF NOT EXISTS products (
+CREATE_PRODUCTS_TABLE = f"""
+CREATE TABLE IF NOT EXISTS {CoreCollections.PRODUCTS} (
     id BIGSERIAL PRIMARY KEY,
     sku VARCHAR(64) UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -38,22 +36,22 @@ CREATE TABLE IF NOT EXISTS products (
 );
 """
 
-CREATE_PRODUCT_VARIANTS_TABLE = """
-CREATE TABLE IF NOT EXISTS product_variants (
-    id BIGSERIAL PRIMARY KEY,
-    product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-    sku VARCHAR(64) UNIQUE NOT NULL,
-    variant_attributes JSONB NOT NULL,   -- e.g. {"size": "M", "color": "Red"}
-    price_override NUMERIC(12, 2),        -- NULL = use parent product's price
-    is_active BOOLEAN NOT NULL DEFAULT TRUE,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-"""
+# CREATE_PRODUCT_VARIANTS_TABLE = """
+# CREATE TABLE IF NOT EXISTS product_variants (
+#     id BIGSERIAL PRIMARY KEY,
+#     product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+#     sku VARCHAR(64) UNIQUE NOT NULL,
+#     variant_attributes JSONB NOT NULL,   -- e.g. {"size": "M", "color": "Red"}
+#     price_override NUMERIC(12, 2),        -- NULL = use parent product's price
+#     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+#     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+# );
+# """
 
 # ---------- Orders ----------
 
-CREATE_ORDERS_TABLE = """
-CREATE TABLE IF NOT EXISTS orders (
+CREATE_ORDERS_TABLE = f"""
+CREATE TABLE IF NOT EXISTS {CoreCollections.ORDERS} (
     id BIGSERIAL PRIMARY KEY,
     order_number VARCHAR(32) UNIQUE NOT NULL,      -- human-facing ref, e.g. ORD-20260929-0001
     customer_id BIGINT NOT NULL REFERENCES customers(id),
@@ -69,8 +67,8 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 """
 
-CREATE_ORDER_ITEMS_TABLE = """
-CREATE TABLE IF NOT EXISTS order_items (
+CREATE_ORDER_ITEMS_TABLE = f"""
+CREATE TABLE IF NOT EXISTS {CoreCollections.ORDER_ITEMS} (
     id BIGSERIAL PRIMARY KEY,
     order_id BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
     product_id BIGINT NOT NULL REFERENCES products(id),

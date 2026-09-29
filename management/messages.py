@@ -1,7 +1,12 @@
 # products messages
 PRODUCTS = {
-    "LIST_SUCCESS": "Products fetched successfuly.",
-    "CREATE": "Product created successfuly.",
+    "LIST_SUCCESS": "Products fetched successfully.",
+    "FETCH_SUCCESS": "Product fetched successfully.",
+    "CREATE_SUCCESS": "Product created successfully.",
+    "UPDATE_SUCCESS": "Product updated successfully.",
+    "DELETE_SUCCESS": "Product deleted successfully.",
+    "LIST_EMPTY": "No products found.",
+    "NOT_FOUND": "Product not found.",
 }
 
 

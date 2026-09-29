@@ -4,7 +4,6 @@ import asyncpg
 
 from core.settings import settings
 from shared.database.schemas import (
-    CREATE_CUSTOMERS_TABLE,
     CREATE_ORDER_ITEMS_TABLE,
     CREATE_ORDERS_TABLE,
     CREATE_PRODUCTS_TABLE,

@@ -1,11 +1,12 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class ECommerceCollections(Enum):
+class CoreCollections(StrEnum):
     USERS = "users"
     PRODUCTS = "products"
     # CATEGORIES = "categories"
     ORDERS = "orders"
+    ORDER_ITEMS = "order_items"
     # CART = "cart"
     # WISHLIST = "wishlist"
     # ADDRESSES = "addresses"
