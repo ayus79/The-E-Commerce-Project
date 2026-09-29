@@ -2,6 +2,7 @@
 uvicorn main:app --port 8001 --workers 1 --reload
 """
 
+import asyncio
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -68,12 +69,41 @@ app.include_router(storefront)
 # Health/Ready check
 @app.get("/health")
 async def health_check():
-    return JSONResponse(content={"status": "ok"}, status_code=200)
+    """Liveness check - process is up. No dependency checks here."""
+    return JSONResponse(
+        content={"status": "ok"}, status_code=200, headers={"Cache-Control": "no-store"}
+    )
 
 
 @app.get("/ready")
 async def readiness_check():
-    return JSONResponse(content={"status": "ok"}, status_code=200)
+    """Readiness check - verifies actual dependencies are reachable."""
+
+    async def check_database():
+        try:
+            client = PostgresClient()
+            result = await client.fetch_value("SELECT 1")
+            return "ok" if result == 1 else "unexpected_response"
+        except Exception:
+            return "error"
+
+    async def check_redis():
+        try:
+            redis = RedisClient()
+            return "ok" if await redis.async_client.ping() else "no_pong"
+        except Exception:
+            return "error"
+
+    database, redis = await asyncio.gather(check_database(), check_redis())
+    checks = {"database": database, "redis": redis}
+
+    is_ready = all(status == "ok" for status in checks.values())
+
+    return JSONResponse(
+        content={"status": "ready" if is_ready else "not_ready", "checks": checks},
+        status_code=200 if is_ready else 503,
+        headers={"Cache-Control": "no-store"},
+    )
 
 
 # Handle 404 Not Found (for non-existent routes)
