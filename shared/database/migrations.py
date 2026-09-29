@@ -3,7 +3,12 @@ from urllib.parse import urlparse, urlunparse
 import asyncpg
 
 from core.settings import settings
-from shared.database.schemas import CREATE_URLS_TABLE
+from shared.database.schemas import (
+    CREATE_CUSTOMERS_TABLE,
+    CREATE_ORDER_ITEMS_TABLE,
+    CREATE_ORDERS_TABLE,
+    CREATE_PRODUCTS_TABLE,
+)
 from shared.utils.log_client import log_message
 
 
@@ -46,10 +51,11 @@ async def run_migrations() -> None:
     """Creates required tables if they don't already exist."""
     connection = await asyncpg.connect(dsn=settings.postgres_database_url)
     try:
-        await connection.execute(CREATE_URLS_TABLE)
-        log_message(
-            "Migrations applied: urls table ensured", file_name="migrations", info=True
-        )
+        await connection.execute(CREATE_CUSTOMERS_TABLE)
+        await connection.execute(CREATE_PRODUCTS_TABLE)
+        await connection.execute(CREATE_ORDERS_TABLE)
+        await connection.execute(CREATE_ORDER_ITEMS_TABLE)
+        log_message("Migrations applied", file_name="migrations", info=True)
     finally:
         await connection.close()
 

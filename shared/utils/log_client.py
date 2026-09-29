@@ -48,6 +48,8 @@ def log_message(
         formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
         handler.setFormatter(formatter)
         logger.addHandler(handler)
+        logger.setLevel(logging.DEBUG)
+        handler.setLevel(logging.DEBUG)
 
     log_msg = f"[{module_name}.{function_name}] {message}"
     if critical:
